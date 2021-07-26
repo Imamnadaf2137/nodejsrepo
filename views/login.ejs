@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <title>Reistration</title>
+  </head>
+  <body>
+    <div class="card bg-warning">
+        <div class="card-body">
+        <h1 class="display-4">Nods js projects</h1>
+        <p class="lead">Welcome to Node Js demo app</p>
+        <p class="lead">Login</p>
+    </div>
+    </div>
+      <div class="container mt-4 ">
+          <div class="row">
+              <div class="col-md-4">
+
+              </div>
+              <div class="col-md-4 card border border-dark">
+                <div class="alert alert-success" role="alert" id="alert-box-success" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong id="ms-success"></strong>
+                  </div>
+                  <div class="alert alert-danger" role="alert" id="alert-box-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong id="ms-warning"></strong>
+                  </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                     
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" class="form-control" id="pass" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                    <button type="submit" class="btn btn-primary mt-4" id="btn-login">Submit</button>
+                    <button type="submit" class="btn btn-warning mt-4">Cancel</button>
+                    <br><br>
+                    <a href="/login">Have a account please click to login...!</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                  
+            </div>
+          </div>
+      </div>
+      <script>
+        $("#alert-box-success").hide();
+        $("#alert-box-warning").hide();
+      $("#btn-login").click(function(){
+          alert("vv");
+          var email=$("#email").val();
+          
+          var pass=$("#pass").val();
+              $.ajax({ 
+             url: '/check-login',
+             type: 'POST',
+             
+             data: { 
+                     
+                      email:email,
+                     
+                      pass:pass
+                  }, 
+             success: function(result, status, xhr){
+                 alert(result.Statuscode);
+                if(result.Statuscode==200)
+                {
+                   window.location.href='/success';
+                }
+                else if(result.Statuscode==202)
+                {
+                    $("#alert-box-success").hide();
+                   $("#alert-box-warning").show();
+                   $("#ms-warning").html('invalid details Faild...');
+                }
+                else
+                {
+                  $("#alert-box-success").hide();
+                   $("#alert-box-warning").show();
+                   $("#ms-warning").html('Chaeck again...');
+                }
+                
+             }, error: function(xhr, status, err){
+                 alert(err);
+             }
+          })
+      });
+  </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
