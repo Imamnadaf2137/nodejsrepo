@@ -1,14 +1,14 @@
 const express=require('express');
 const bodyParser = require('body-parser')
-const session = require('express-session')
+//const session = require('express-session')
 const port=process.env.PORT || 4500;
 const app = express();
-var mysql = require('mysql');  
+//var mysql = require('mysql');  
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(session({ secret: 'passport'}));
  
-var con = mysql.createConnection({  
+/**var con = mysql.createConnection({  
 host: "localhost",  
 user: "root",  
 password: "",  
@@ -19,7 +19,7 @@ con.connect(function(err){
     if(err) throw err;
     console.log('Connected...');
 })
-
+**/
 
 app.set('view engine','ejs');
 app.set('views','views');
